@@ -9,7 +9,7 @@
 <body>
   <header class="app-header">
     <h1>🛒 Suivi des Achats</h1>
-    <p class="subtitle">Notez vos achats jour par jour : nombre d'achats et montant dépensé.</p>
+    <p class="subtitle">Notez vos achats jour par jour sur 2 cartes : nombre d'achats et montant dépensé.</p>
   </header>
 
   <main class="container">
@@ -18,6 +18,11 @@
         <button id="prevMonth" class="btn nav-btn" aria-label="Mois précédent">←</button>
         <h2 id="monthLabel" class="month-label"></h2>
         <button id="nextMonth" class="btn nav-btn" aria-label="Mois suivant">→</button>
+      </div>
+
+      <div class="legend">
+        <span class="legend-item"><span class="dot dot-c1"></span> Carte 1</span>
+        <span class="legend-item"><span class="dot dot-c2"></span> Carte 2</span>
       </div>
 
       <div class="calendar-grid weekdays">
@@ -30,17 +35,17 @@
     <section class="summary-card">
       <h3>Résumé du mois</h3>
       <div class="summary-stats">
-        <div class="stat">
-          <span class="stat-value" id="totalPurchases">0</span>
-          <span class="stat-label">Achats</span>
+        <div class="stat stat-c1">
+          <span class="stat-value" id="totalC1">0,00 €</span>
+          <span class="stat-label" id="purchasesC1">Carte 1 — 0 achat</span>
+        </div>
+        <div class="stat stat-c2">
+          <span class="stat-value" id="totalC2">0,00 €</span>
+          <span class="stat-label" id="purchasesC2">Carte 2 — 0 achat</span>
         </div>
         <div class="stat">
           <span class="stat-value" id="totalAmount">0,00 €</span>
-          <span class="stat-label">Montant total</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value" id="avgAmount">0,00 €</span>
-          <span class="stat-label">Panier moyen</span>
+          <span class="stat-label">Total des 2 cartes</span>
         </div>
         <div class="stat">
           <span class="stat-value" id="activeDays">0</span>
@@ -58,14 +63,24 @@
     <div class="modal" role="dialog" aria-modal="true">
       <h3 id="modalDate">Jour</h3>
       <form id="entryForm">
-        <label for="purchaseCount">Nombre d'achats</label>
-        <input type="number" id="purchaseCount" min="0" step="1" placeholder="Ex : 3" required />
+        <div class="card-section section-c1">
+          <h4><span class="dot dot-c1"></span> Carte 1</h4>
+          <label for="count1">Nombre d'achats</label>
+          <input type="number" id="count1" min="0" step="1" placeholder="Ex : 3" />
+          <label for="amount1">Montant (€)</label>
+          <input type="number" id="amount1" min="0" step="0.01" placeholder="Ex : 24,50" />
+        </div>
 
-        <label for="purchaseAmount">Montant (€)</label>
-        <input type="number" id="purchaseAmount" min="0" step="0.01" placeholder="Ex : 24,50" required />
+        <div class="card-section section-c2">
+          <h4><span class="dot dot-c2"></span> Carte 2</h4>
+          <label for="count2">Nombre d'achats</label>
+          <input type="number" id="count2" min="0" step="1" placeholder="Ex : 1" />
+          <label for="amount2">Montant (€)</label>
+          <input type="number" id="amount2" min="0" step="0.01" placeholder="Ex : 12,90" />
+        </div>
 
         <div class="modal-actions">
-          <button type="button" id="deleteEntry" class="btn danger hidden">Supprimer</button>
+          <button type="button" id="deleteEntry" class="btn danger hidden">Supprimer la journée</button>
           <button type="button" id="cancelEntry" class="btn secondary">Annuler</button>
           <button type="submit" class="btn primary">Enregistrer</button>
         </div>
